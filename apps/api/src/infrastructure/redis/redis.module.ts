@@ -1,4 +1,4 @@
-import { Module, Global, DynamicModule, Provider } from '@nestjs/common';
+import { Module, Global, DynamicModule, Provider, Logger } from '@nestjs/common';
 import Redis from 'ioredis';
 import { REDIS_CLIENT } from './redis.constants';
 import { RedisModuleAsyncOptions } from './interfaces';
@@ -24,11 +24,11 @@ export class RedisModule {
         });
 
         client.on('connect', () => {
-          console.log('✅ Redis Connected');
+          Logger.log('Redis Connected Successfully... ✔', 'RedisModule');
         });
 
         client.on('error', (err: Error) => {
-          console.error('❌ Redis Error', err.message);
+          Logger.error('Redis Error', err.stack);
         });
 
         return client;
