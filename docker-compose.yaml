@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+
+  # -------------------------
+  # PostgreSQL 16 Database
+  # -------------------------
+
+  postgres_server:
+    image: postgres:16
+    container_name: postgres_server
+    restart: always
+
+    ports:
+      - "5435:5432"
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: story-book
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # -------------------------
+  # Redis Server
+  # -------------------------
+
+  redis_server:
+    image: redis:7
+    container_name: redis_server
+    restart: always
+
+    command: >
+      redis-server
+      --requirepass mypassword
+      --appendonly yes
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+
+    ports:
+      - "6379:6379"
+
+    volumes:
+      - redis_data:/data
+
+# -------------------------
+# Volumes
+# -------------------------
+
+volumes:
+  postgres_data:
+  redis_data:
