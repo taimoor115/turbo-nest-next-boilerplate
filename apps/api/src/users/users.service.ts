@@ -10,7 +10,6 @@ export class UsersService {
     private db: any,
   ) {}
   async create(dto) {
-    console.log(dto)
     return this.db.insert(tests).values(dto).returning();
   }
 

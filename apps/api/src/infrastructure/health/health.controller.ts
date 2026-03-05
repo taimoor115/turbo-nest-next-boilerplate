@@ -42,7 +42,6 @@ export class HealthController {
 
     try {
       const isRedisHealthy = await this.redisService.isHealthy();
-      console.log('Redis health check result:', isRedisHealthy);
       if (isRedisHealthy) {
         result.redis = 'up';
       } else {
