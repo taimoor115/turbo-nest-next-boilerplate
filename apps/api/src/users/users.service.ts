@@ -1,16 +1,17 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { DATABASE_CONNECTION } from 'src/infrastructure/database/database.contants';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { tests } from 'src/infrastructure/database/schema/user.schema';
+// import { tests } from 'src/infrastructure/database/schema/user.schema';
 
 @Injectable()
 export class UsersService {
-   constructor(
+  constructor(
     @Inject(DATABASE_CONNECTION)
     private db: any,
   ) {}
-  async create(dto) {
-    return this.db.insert(tests).values(dto).returning();
+  create(dto) {
+    // return this.db.insert(tests).values(dto).returning();
+    return 'okay';
   }
 
   findAll() {
